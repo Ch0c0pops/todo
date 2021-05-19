@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node index.js",
+    "server": "nodemon index.js",
     "client": "npm run start --prefix ../",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   },
