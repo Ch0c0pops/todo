@@ -55,6 +55,7 @@
   position: fixed;
   height: 100vh;
   top: 180px;
+  overflow: scroll;
 
   &__main-box {
     display: flex;

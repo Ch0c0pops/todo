@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Todo from "./Todo";
-import {deleteTodoAC, setIsDoneAC} from "../Redux/Reducers/todoReducer";
+import {deleteTodoAC, setIsDoneAC, getTodosThunk, deleteTodoThunk} from "../Redux/Reducers/todoReducer";
 
 const TodoViewer = (props) => {
+
+    useEffect(() => {
+        props.getTodos()
+        console.log('rerender')
+    }, [])
 
     if (props.todos.length === 0) {
         return <h2>
@@ -11,9 +16,10 @@ const TodoViewer = (props) => {
         </h2>
     }
 
-    const mappedTodos = props.todos.map(item => <Todo title={item.title} text={item.text} id={item.id}
-                                                      done={item.done} deleteTodo={props.deleteTodo}
-                                                      setIsDone={props.setIsDone} key={item.id}/>)
+    const mappedTodos = props.todos.map(item => <Todo title={item.title} text={item.text} id={item._id}
+                                                      isDone={item.isDone} deleteTodo={props.deleteTodo}
+                                                      setIsDone={props.setIsDone} key={item._id + Math.random()}
+    />)
 
     return (
         <div>
@@ -28,12 +34,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteTodo: (id) => dispatch(deleteTodoAC(id)),
-        setIsDone: (id, done) => dispatch(setIsDoneAC(id, done))
+        deleteTodo: (id) => dispatch(deleteTodoThunk(id)),
+        setIsDone: (id, done) => dispatch(setIsDoneAC(id, done)),
+        getTodos: () => dispatch(getTodosThunk())
     }
 }
 
 
 export const TodoViewerContainer = connect(mapStateToProps, mapDispatchToProps)(TodoViewer)
-
-//export default TodoViewer

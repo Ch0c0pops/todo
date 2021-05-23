@@ -10,7 +10,8 @@ const todoSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    isDone: Boolean
 })
 
 const todoModel = mongoose.model("todoModel", todoSchema)
