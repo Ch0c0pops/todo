@@ -1,17 +1,34 @@
 import axios from "axios";
 
-const todoApi ={
+const todoApi = {
 
-   async  getAll(){
-       return axios.get('http://localhost:5000/api/todos').then(
-            response => response.data
-        )
+    getAll() {
+        try {
+            return axios.get('http://localhost:5000/api/todos').then(
+                response => response.data
+            )
+        } catch (e) {
+            console.log(e.response)
+        }
     },
-    async deleteTodo(id){
-       debugger
-        return axios.delete(`http://localhost:5000/api/todos/?id=${id}`).then(
-            response => response.data
-        )
+
+    deleteTodo(id) {
+        try {
+            return axios.delete(`http://localhost:5000/api/todos/?id=${id}`).then(
+                response => response.data
+            )
+        } catch (e) {
+            console.log(e.response)
+        }
+    },
+    addTodo(todo) {
+        try {
+           return axios.post('http://localhost:5000/api/todos', {...todo}).then(
+                response => response.data
+            )
+        } catch (e) {
+            console.log(e.response)
+        }
     }
 }
 

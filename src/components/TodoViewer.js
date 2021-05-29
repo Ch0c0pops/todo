@@ -7,7 +7,6 @@ const TodoViewer = (props) => {
 
     useEffect(() => {
         props.getTodos()
-        console.log('rerender')
     }, [])
 
     if (props.todos.length === 0) {

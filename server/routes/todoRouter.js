@@ -1,9 +1,8 @@
 import Router from 'express'
 import todoModel from "../models/todoModel.js"
-import cors from 'cors'
 
 const router = new Router()
-router.get('/todos',  async (req, res) => {
+router.get('/todos', async (req, res) => {
     try {
         const todos = await todoModel.find()
         res.json(todos)
@@ -12,12 +11,22 @@ router.get('/todos',  async (req, res) => {
     }
 })
 
-router.delete('/todos', async(req, res)=>{
-    try{
+router.delete('/todos', async (req, res) => {
+    try {
         const todo = await todoModel.findByIdAndDelete(req.query.id)
         res.status(200).json(todo)
 
-    }catch (e) {
+    } catch (e) {
+        res.status(500).json(e)
+    }
+})
+
+router.post('/todos', async (req, res) => {
+    try {
+        const todo = new todoModel({title: req.body.title, text: req.body.text, isDone: false})
+        await todo.save()
+        res.status(200).json(todo)
+    } catch (e) {
         res.status(500).json(e)
     }
 })

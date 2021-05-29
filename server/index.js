@@ -27,12 +27,4 @@ const start = async () => {
     }
 }
 
-
-//
-// const to do = new todoModel({title: "hello kitty", text: "bla bla", isDone: false})
-//
-// to do.save(function (err, data) {
-//     if (err) return console.log(err)
-//     console.log(data)
-// })
 start()

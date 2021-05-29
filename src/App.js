@@ -2,7 +2,7 @@ import React from "react";
 import './App.scss';
 import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
-import CreateTodo from "./components/CreateTodo";
+import CreateTodo, {ConnectedCreateTodo} from "./components/CreateTodo";
 import Main from "./components/Main";
 import {TodoViewerContainer} from "./components/TodoViewer";
 import Nav from "./components/Nav";
@@ -22,7 +22,7 @@ function App() {
                 <div className='content'>
                     <Switch>
                         <Route exact path='/' render={() => <Main/>}/>
-                        <Route path='/createTodo' render={() => <CreateTodo/>}/>
+                        <Route path='/createTodo' render={() => <ConnectedCreateTodo/>}/>
                         <Route path='/todolist' render={() => <TodoViewerContainer/>}/>
                     </Switch>
                 </div>
