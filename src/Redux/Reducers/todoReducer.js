@@ -6,7 +6,7 @@ const ADD_TODO = 'ADD_TODO'
 const GET_ALL_TODOS = 'GET_ALL_TODOS'
 
 export const deleteTodoAC = (props) => ({type: DELETE_TODO, id: props})
-export const setIsDoneAC = (...props) => ({type: SET_IS_DONE, id: props[0], isDone: props[1]})
+export const setIsDoneAC = (props) => ({type: SET_IS_DONE, id: props._id, isDone: props.isDone})
 export const addTodoAC = (todoData) => ({type: ADD_TODO, todo: todoData})
 export const getAllTodosAC = (todos) => ({type: GET_ALL_TODOS, todos})
 
@@ -26,6 +26,12 @@ export const addTodoThunk = (todo) => (dispatch) => {
     )
 }
 
+export const setIsDoneThunk =(id, isDone)=> async (dispatch)=>{
+    const data = await todoApi.setIsDone(id, isDone)
+    dispatch(setIsDoneAC(data))
+    dispatch(getTodosThunk())
+}
+
 const initialState = {
     todos: []
 }
@@ -40,15 +46,7 @@ const todoReducer = (state = initialState, action) => {
         case SET_IS_DONE:
             return {
                 ...state,
-                todos: state.todos.map(todo => {
-                    if (todo.id === action.id) {
-                        return {
-                            ...todo, done: action.isDone
-                        }
-                    }
-                    return todo
-                })
-
+                todos: state.todos.map(todo => todo.id === action.id ? {...todo, isDone: action.isDone} : todo),
             }
         case ADD_TODO:
             return {

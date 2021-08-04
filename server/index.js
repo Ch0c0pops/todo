@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import config from 'config'
 import todoModel from'./models/todoModel.js'
-import router from "./routes/todoRouter.js";
+import router from "./routes/todoRouter.js"
 import dotenv from 'dotenv'
 import cors from 'cors'
 
@@ -21,7 +21,7 @@ const start = async () => {
         //await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true},
         await mongoose.connect("mongodb+srv://chocs:chocs123@cluster0.mjrli.mongodb.net/TodoDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true},
             () => console.log('DB is running'))
-        app.listen(PORT, () => console.log('Server is running'))
+        app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
     } catch (e) {
         console.log(e)
     }

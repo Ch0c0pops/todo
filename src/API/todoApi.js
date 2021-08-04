@@ -23,11 +23,20 @@ const todoApi = {
     },
     addTodo(todo) {
         try {
-           return axios.post('http://localhost:5000/api/todos', {...todo}).then(
+            return axios.post('http://localhost:5000/api/todos', {...todo}).then(
                 response => response.data
             )
         } catch (e) {
             console.log(e.response)
+        }
+    },
+    setIsDone(id, isDone) {
+        try {
+           return axios.put('http://localhost:5000/api/todos', {id, isDone}).then(
+                response => response.data
+            )
+        } catch (e) {
+
         }
     }
 }

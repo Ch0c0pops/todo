@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Todo from "./Todo";
-import {deleteTodoAC, setIsDoneAC, getTodosThunk, deleteTodoThunk} from "../Redux/Reducers/todoReducer";
+import {getTodosThunk, deleteTodoThunk, setIsDoneThunk} from "../Redux/Reducers/todoReducer";
 
 const TodoViewer = (props) => {
 
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteTodo: (id) => dispatch(deleteTodoThunk(id)),
-        setIsDone: (id, done) => dispatch(setIsDoneAC(id, done)),
+        setIsDone: (id, done) => dispatch(setIsDoneThunk(id, done)),
         getTodos: () => dispatch(getTodosThunk())
     }
 }
